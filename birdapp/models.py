@@ -10,7 +10,7 @@ class Observation(models.Model):
     observation_date = models.DateField(null=True, blank=True)
     bird_name = models.CharField(null=False, blank=False, max_length=255)
     bird_category = models.CharField(null=False, blank=False, max_length=255)
-    picture = models.ImageField(upload_to="django-proj/static/images", null=False, blank=False)
+    picture = models.ImageField(upload_to="static/images", default="static/images/profile.jpeg", null=False, blank=False)
     description = models.TextField(null=True, blank=True, max_length=1000)
     color = models.CharField(null=False, blank=False, max_length=100)
 
