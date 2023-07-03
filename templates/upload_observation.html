@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Bootstrap form -->
+
+<div class="container col-6">
+
+    <form action="{% url 'upload_observation' %}" method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group mb-3 mt-4">
+            <label for="exampleFormControlInput1">Date of Observation</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="MM-DD-YYYY" name="date">
+        </div>
+
+        <div class="form-group mb-3 mt-4">
+            <label for="exampleFormControlInput1">Bird Name</label>
+            <input class="form-control" id="exampleFormControlInput1" name="name">
+        </div>
+
+        <div class="form-group mb-3 mt-4">
+            <label for="exampleFormControlInput1">Bird Category</label>
+            <input class="form-control" id="exampleFormControlInput1" name="category">
+        </div>
+
+        <div class="form-group mb-3 mt-4">
+            <label for="exampleFormControlFile1">Upload Photo</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="picture">
+          </div>
+
+        <div class="form-group mb-3 mt-4">
+            <label for="exampleFormControlTextarea1">Description of Observation</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+          </div>
+
+        <input type="submit" class="btn btn-success mt-4" value="Upload Observation">
+
+    </form>
+</div>
+
+{% endblock %}
