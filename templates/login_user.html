@@ -4,19 +4,19 @@
 
 <div class="container col-4 login">
 
-    <form class="form-signin" action="{% url 'login' %}" method="POST">
+    <form class="form-signin" action="{% url 'login_user' %}" method="POST">
 
         {% csrf_token %}
 
         <h1 class="text-center text-muted display-4 mb-5">Login</h1>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input id="inputEmail" class="form-control mb-2" placeholder="Username" required autofocus>
+        <input id="inputEmail" class="form-control mb-2" placeholder="Username" name="username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control mb-4" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control mb-4" placeholder="Password" name="password" required>
         
         <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me" name="remember"> Remember me
         </label>
         </div>
 

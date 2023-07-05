@@ -3,36 +3,89 @@ from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from .models import User, Observation
+from .my_validators import _password_good, _confirm_password
 
 # Create your views here.
 def home(request):
     return render(request, "home.html")
 
 
-def login(request):
+def login_user(request):
         
     if request.method == "POST":
-        messages.add_message(request, messages.SUCCESS, "You are logged in")
+
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+
+            login(request, user)
+            messages.add_message(request, messages.SUCCESS, "You are logged in")
+            return redirect("home")
+        
+        else:
+            messages.add_message(request, messages.WARNING, "Credentials are incorrect")
+
+    return render(request, "login_user.html")
+
+def logout_user(request):
+
+    if request.method == "POST":
+
+        try:
+            logout(request)
+            messages.add_message(request, messages.SUCCESS, "You're logged out")
+        except:
+            messages.add_message(request, messages.WARNING, "Could not log out")
+
+
+    if not request.user.is_authenticated:
         return redirect("home")
 
-    return render(request, "login.html")
-
-def logout(request):
-    return render(request, "logout.html")
+    return render(request, "logout_user.html")
 
 def signup(request):
 
     if request.method == "POST":
-        messages.add_message(request, messages.SUCCESS, "Your account was created")
-        return redirect("login")
+
+        unique_username = False
+
+        username = request.POST["username"]
+        password = request.POST["password"]
+        confirm = request.POST["confirm"]
+
+        try:
+            users = User.objects.get(username = username)
+
+        except User.DoesNotExist:
+            unique_username = True
+        
+        if not unique_username:
+            messages.add_message(request, messages.WARNING, "Choose a different username")
+
+        elif not _password_good(password):
+            messages.add_message(request, messages.WARNING, "Password doesn't meet requirements")
+        
+        elif not _confirm_password(password, confirm):
+            messages.add_message(request, messages.WARNING, "Passwords don't match")
+
+        else:
+
+            new_user = User.objects.create_user(username=username, password=password)
+
+            messages.add_message(request, messages.SUCCESS, "Your account was created")
+            return redirect("login_user")
 
     return render(request, "signup.html")
 
 def upload_observation(request):
 
     if not request.user.is_authenticated:
-        return redirect("login")
+        return redirect("login_user")
 
     # validate the date with form and use form.save() and model forms
 
@@ -72,3 +125,5 @@ def contact(request):
 
 
     return render(request, "contact.html")
+
+

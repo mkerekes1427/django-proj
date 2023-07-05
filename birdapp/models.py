@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Observation(models.Model):
 
     person = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
-    observation_date = models.DateField(null=True, blank=True)
+    observation_date = models.DateField(null=False, blank=False)
     bird_name = models.CharField(null=False, blank=False, max_length=255)
     bird_category = models.CharField(null=False, blank=False, max_length=255)
     picture = models.ImageField(upload_to="static/images", default="static/images/profile.jpeg", null=False, blank=False)
