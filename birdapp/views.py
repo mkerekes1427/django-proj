@@ -1,13 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
+from .models import User, Observation
 
 # Create your views here.
 def home(request):
     return render(request, "home.html")
 
+
+def login(request):
+        
+    if request.method == "POST":
+        messages.add_message(request, messages.SUCCESS, "You are logged in")
+        return redirect("home")
+
+    return render(request, "login.html")
+
+def logout(request):
+    return render(request, "logout.html")
+
+def signup(request):
+
+    if request.method == "POST":
+        messages.add_message(request, messages.SUCCESS, "Your account was created")
+        return redirect("login")
+
+    return render(request, "signup.html")
+
 def upload_observation(request):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
 
     # validate the date with form and use form.save() and model forms
 
