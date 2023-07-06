@@ -2,7 +2,21 @@
 
 {% block content %}
 
-<h1>{{current}}</h1>
+<div class="container">
 
+    <!-- Can't indent HTML inside for loop -->
+    {% for o in observations %}
+
+    <div class="container mb-5">
+        <h1>{{o.date}}</h1>
+        <h1 style="color : {{o.color}}">{{o.name}}</h1>
+        <h1>{{o.category}}</h1>
+        <img src="{{o.picture.url}}" alt="{{o.name}}" height="400" width="500">
+        <h1>{{o.description}}</h1>
+    </div>
+
+    {% endfor %}
+
+</div>
 
 {% endblock %}

@@ -118,7 +118,9 @@ def profile(request):
 
     current_user = User.objects.get(id=request.user.id)
 
-    render(request, "profile.html", context={"current" : current_user})
+    observations = Observation.objects.filter(person=current_user)
+
+    return render(request, "profile.html", context={"observations" : observations})
 
 
 def bird_email(request):
