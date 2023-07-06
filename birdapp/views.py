@@ -110,6 +110,17 @@ def upload_observation(request):
     return render(request, "upload_observation.html")
 
 
+def profile(request):
+
+
+    if not request.user.is_authenticated:
+        redirect("user_login")
+
+    current_user = User.objects.get(id=request.user.id)
+
+    render(request, "profile.html", context={"current" : current_user})
+
+
 def bird_email(request):
 
     if request.method == "POST":
