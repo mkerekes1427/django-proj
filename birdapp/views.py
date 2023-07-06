@@ -5,7 +5,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import User, Observation
-from .my_validators import _password_good, _confirm_password
+from .my_validators import _password_good, _confirm_password, _bird_color
+from .forms import ObservationForm
 
 # Create your views here.
 def home(request):
@@ -87,11 +88,25 @@ def upload_observation(request):
     if not request.user.is_authenticated:
         return redirect("login_user")
 
-    # validate the date with form and use form.save() and model forms
-
     if request.method == "POST":
-        return JsonResponse({"data" : request.POST})
 
+        color = _bird_color(request.POST["name"])
+
+        new_observation = Observation(person=request.user, color=color)
+
+        form = ObservationForm(request.POST, request.FILES, instance=new_observation)
+
+        if form.is_valid():
+
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Observation was uploaded")
+
+        else:
+            print("Form not valid")
+            print(form.errors)
+            messages.add_message(request, messages.WARNING, "Error with upload")
+        
+        
     return render(request, "upload_observation.html")
 
 
@@ -100,8 +115,7 @@ def bird_email(request):
     if request.method == "POST":
         return JsonResponse({"data" : request.POST})  
 
-    categories = ["Cardinal", "Corvids", "Hawks", "Falcons", "Owls",
-                  "Warblers", "Water Birds"]
+    categories = ["Songbird", "Raptor", "Water Bird"]
 
     return render(request, "bird_email.html", context={"categories" : categories})
 

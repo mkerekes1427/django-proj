@@ -6,13 +6,13 @@
 
 <div class="container col-6">
 
-    <form action="{% url 'upload_observation' %}" method="POST">
+    <form action="{% url 'upload_observation' %}" method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
 
         <div class="form-group mb-3 mt-4">
             <label for="exampleFormControlInput1">Date of Observation</label>
-            <input class="form-control" id="exampleFormControlInput1" placeholder="MM-DD-YYYY" name="date" required>
+            <input type="date" class="form-control" id="datepicker" name="date" max="{% now 'Y-m-d' %}" required>
         </div>
 
         <div class="form-group mb-3 mt-4">
@@ -21,8 +21,12 @@
         </div>
 
         <div class="form-group mb-3 mt-4">
-            <label for="exampleFormControlInput1">Bird Category</label>
-            <input class="form-control" id="exampleFormControlInput1" name="category" required>
+            <label for="exampleFormControlSelect1">Bird Category</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="category">
+              <option>Songbird</option>
+              <option>Raptor</option>
+              <option>Water Bird</option>
+            </select>
         </div>
 
         <div class="form-group mb-3 mt-4">
