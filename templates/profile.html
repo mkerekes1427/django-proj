@@ -12,14 +12,14 @@
 
         <div class="col-md-6">
             <div class="card mb-4 box-shadow">
-                <div class="card-body pb-2">
+                <div class="card-body pb-2 photo-card">
                     <h1 class="mb-1 text-center" style="color: {{o.color}}">{{o.name}}</h1>
                     <p class="mb-1 text-muted text-center">{{o.date}}</p>
                     <h4 class="text-center bold">{{o.category}}</h4>
                 </div>
-                <img src="{{o.picture.url}}" width="100%" alt="{{o.name}}">
+                <img src="{{o.picture.url}}" width="100%" aria-label="{{o.name}}">
                 {% if o.description != "" %}
-                <h5 class="card-text text-center mb-auto px-3 py-3">{{o.description}}</h5>
+                <h5 class="card-text text-center mb-auto px-3 py-3 photo-card">{{o.description}}</h5>
                 {% endif %}
             </div>
         </div>

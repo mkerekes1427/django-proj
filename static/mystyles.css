@@ -2,6 +2,18 @@
     font-size: 30px;
 }
 
-.login{
+.user{
+    font-size: 20px;
+}
+
+.top-spacing {
     margin-top: 100px;
+}
+
+.photo-card{
+    background-color: #F6F1F1;
+}
+
+body{
+    background-color: #e9ecef
 }

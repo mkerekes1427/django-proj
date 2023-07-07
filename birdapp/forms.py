@@ -1,7 +1,7 @@
-from django.forms import ModelForm, DateField, ValidationError
+from django.forms import ModelForm, ValidationError
 from .models import Observation
-from .my_validators import _valid_pic
-from django.contrib import messages
+import string
+
 
 class ObservationForm(ModelForm):
 
@@ -14,14 +14,12 @@ class ObservationForm(ModelForm):
 
         cleaned_data = super(ObservationForm, self).clean()
 
-        cleaned_data["name"] = cleaned_data["name"].title()
+        cleaned_data["name"] = string.capwords(cleaned_data["name"])
         
         try:
             pic = cleaned_data["picture"]
         except:
             raise ValidationError("")
-        
-        print(cleaned_data)
         
         return cleaned_data
 

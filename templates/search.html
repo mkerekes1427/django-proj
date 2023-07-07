@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container top-spacing">
+
+    <form class="col-6 d-flex justify-content-center mx-auto mb-5" action="{% url 'search' %}" method="GET">
+        <input class="form-control" placeholder="Bird name" aria-label="Search" name="name">
+        <input class="btn btn-outline-success" type="submit" value="Search">
+    </form>
+
+    <h1 class="display-3 text-center mt-5 mb-5">Search Results</h1>
+    <div class="row">
+
+        <!-- Can't indent HTML inside for loop -->
+        {% for o in observations %}
+
+        <div class="col-md-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body pb-2 photo-card">
+                    <h1 class="mb-1 text-center" style="color: {{o.color}}">{{o.name}}</h1>
+                    <h6 class="mb-1 text-muted text-center">{{o.date}}</h6>
+                    <h3 class="text-center bold">{{o.category}}</h3>
+                    <p class="blockquote-footer text-center user">{{o.person.username}}</p>
+                </div>
+                <img src="{{o.picture.url}}" width="100%" aria-label="{{o.name}}">
+                {% if o.description != "" %}
+                <h5 class="card-text text-center mb-auto px-3 py-3 photo-card">{{o.description}}</h5>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+
+
+
+{% endblock %}

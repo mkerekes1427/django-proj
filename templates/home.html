@@ -8,8 +8,10 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-        <h1 class="jumbotron-heading">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <h1 class="jumbotron-heading display-2">Birds</h1>
+        <p class="lead text-muted mb-5">Explore the site to see pictures of birds that our users uploaded. Use the search link in the navbar to search our observations. Better yet, sign up for an account and login to upload your own observations.</p>
+        <p class="lead text-muted mt-3">Click the button below to get pictures emailed to you.</p>
+
         <p>
             <a href="{% url 'bird_email' %}" class="btn btn-primary">Email Bird</a>
         </p>
@@ -17,111 +19,75 @@
     </section>
 
     <div class="album py-5 bg-light">
+
         <div class="container">
 
-        <div class="row">
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
+            <h1 class="text-center display-4, mb-3">Song Birds</h1>
+            
+            <div class="row">
+
+                {% for o in songbirds %}
+
+                <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{o.picture.url}}" width="100%" class="card-img-top"aria-label="{{o.name}}"/>
+                    <div class="card-body">
+                    <h1 class="text-center mb-2" style="color : {{o.color}}">{{o.name}}</h1>
+                    <h4 class="text-center blockquote-footer user">{{o.person.username}}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">{{o.date}}</small>
+                    </div>
+                    </div>
                 </div>
                 </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
+
+                {% endfor %}
             </div>
 
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
+            <h1 class="text-center display-4 mb-3">Raptors</h1>
+
+            <div class="row">
+
+                {% for o in raptors %}
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{{o.picture.url}}" width="100%" class="card-img-top"aria-label="{{o.name}}"/>
+                        <div class="card-body">
+                        <h1 class="text-center mb-2" style="color : {{o.color}}">{{o.name}}</h1>
+                        <h4 class="text-center blockquote user">{{o.person.username}}</h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{o.date}}</small>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                {% endfor %}
+
             </div>
 
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="100%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
+            <h1 class="display-4 text-center mb-3">Water Birds</h1>
+
+            <div class="row">
+
+                {% for o in waterbirds %}
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{{o.picture.url}}" width="100%" class="card-img-top"aria-label="{{o.name}}"/>
+                        <div class="card-body">
+                        <h1 class="text-center mb-2" style="color : {{o.color}}">{{o.name}}</h1>
+                        <h4 class="text-center blockquote user">{{o.person.username}}</h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{o.date}}</small>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                {% endfor %}
             </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="50%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/Grosbeak.JPG' %}" width="50%" height="10%" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
-                <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
         </div>
     </div>
 </main>

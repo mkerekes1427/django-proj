@@ -1,5 +1,6 @@
+import random
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
@@ -10,10 +11,26 @@ from .forms import ObservationForm
 
 # Create your views here.
 def home(request):
-    return render(request, "home.html")
+
+    all_songbirds = Observation.objects.filter(category="Songbird")
+    all_raptors = Observation.objects.filter(category="Raptor")
+    all_waterbirds = Observation.objects.filter(category="Water Bird")
+
+    songbirds = random.sample(list(all_songbirds), 3)
+    raptors = random.sample(list(all_raptors), 3)
+    waterbids = random.sample(list(all_waterbirds), 3)
+
+    return render(request, "home.html", context={
+        "songbirds" : songbirds,
+        "raptors" : raptors,
+        "waterbirds" : waterbids
+    })
 
 
 def login_user(request):
+
+    if request.user.is_authenticated:
+        return redirect("home")
         
     if request.method == "POST":
 
@@ -112,7 +129,6 @@ def upload_observation(request):
 
 def profile(request):
 
-
     if not request.user.is_authenticated:
         redirect("user_login")
 
@@ -121,6 +137,16 @@ def profile(request):
     observations = Observation.objects.filter(person=current_user).order_by("date")
 
     return render(request, "profile.html", context={"observations" : observations})
+
+def search(request):
+
+    observations = Observation.objects.all().order_by("-date")
+
+    bird_name = request.GET.get("name", "")
+
+    observations = Observation.objects.filter(name__icontains=bird_name).order_by("-date")
+
+    return render(request, "search.html", context={"observations" : observations})
 
 
 def bird_email(request):

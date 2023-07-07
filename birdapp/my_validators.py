@@ -1,7 +1,7 @@
 # My private functions for validating
 
 from datetime import datetime
-from PIL import Image
+import string
 
 def _password_good(password):
 
@@ -42,19 +42,10 @@ def _confirm_password(password, confirm):
         return True
     
 
-def _valid_pic(pic):
-
-    try:
-        Image.open(pic)
-    except Exception as e:
-        return False
-    
-    return True
-
 # Not a validating function but it is a private helper function.
 def _bird_color(name):
 
-    name = name.title()
+    name = string.capwords(name)
 
     red_birds = ["Red-Tailed Hawk", "Cardinal", "Rose-Breasted Grosbeak", "Red-Bellied Woodpecker"]
     orange_birds = ["American Robin", "Red-Shouldered Hawk", "Carolina Wren"]
