@@ -118,7 +118,7 @@ def profile(request):
 
     current_user = User.objects.get(id=request.user.id)
 
-    observations = Observation.objects.filter(person=current_user)
+    observations = Observation.objects.filter(person=current_user).order_by("date")
 
     return render(request, "profile.html", context={"observations" : observations})
 
