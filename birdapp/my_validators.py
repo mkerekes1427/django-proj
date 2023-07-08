@@ -47,7 +47,7 @@ def _bird_color(name):
 
     name = string.capwords(name)
 
-    red_birds = ["Red-Tailed Hawk", "Cardinal", "Rose-Breasted Grosbeak", "Red-Bellied Woodpecker"]
+    red_birds = ["Red-Tailed Hawk", "Northern Cardinal", "Rose-Breasted Grosbeak", "Red-Bellied Woodpecker"]
     orange_birds = ["American Robin", "Red-Shouldered Hawk", "Carolina Wren"]
     blue_birds = ["Eastern Bluebird", "Blue Jay", "Great-Blue Heron"]
     yellow_birds = ["American Goldfinch", "Ruby-Crowned Kinglet"]
