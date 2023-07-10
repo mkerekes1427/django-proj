@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Bootstrap form -->
+
+<div class="container">
+
+        {% for o in observations %}
+
+        <h1 class="text-center" style="color : {{o.color}}">{{o.name}}</h1>
+        <h3 class="text-center">{{o.category}}</h3>
+        <img src="{{o.picture.url}}" class="mb-5" aria-label="{{o.name}}"  width="100%">
+
+        {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,13 +1,15 @@
 import random
+
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+
 from .models import User, Observation
 from .my_validators import _password_good, _confirm_password, _bird_color
 from .forms import ObservationForm
+
 
 # Create your views here.
 def home(request):
@@ -149,14 +151,13 @@ def search(request):
     return render(request, "search.html", context={"observations" : observations})
 
 
-def bird_email(request):
+def random_bird(request):
 
-    if request.method == "POST":
-        return JsonResponse({"data" : request.POST})  
+    all_birds = Observation.objects.all()
 
-    categories = ["Songbird", "Raptor", "Water Bird"]
+    observations = random.sample(list(all_birds), 1)
 
-    return render(request, "bird_email.html", context={"categories" : categories})
+    return render(request, "random_bird.html", context={"observations" : observations})
 
 def contact(request):
 
