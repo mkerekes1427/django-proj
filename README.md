@@ -1,1 +1,3 @@
 Just a project done to help me learn about Django. This is a bird observation app where people post their observations. It's basically a riff off of E-bird.
+
+I tried doing a functionality where people receive an email of a few random bird pictures from a category and an email functionality of a contact form, but I couldn't get it to work. I tried using gmail, and eventually I was succesful when I downgraded the Django version to 4.1 instead of 4.2. But, I tried the contact form on a different day, and it wasn't working. I tried using gmail email, yahoo, and a couple of others, but it didn't work out. I would use gmail again, but I can't use my phone number anymore since gmail says I've used it for too many accounts. 
