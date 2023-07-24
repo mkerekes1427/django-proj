@@ -1,0 +1,28 @@
+
+Admin
+password: password
+
+
+Email for sending emails is: djangobirdssite@gmail.com
+Password: PythonwithDjangoPassword%6
+
+
+User1
+
+user1
+userpassword1
+
+User2
+
+user2
+UserPassword#2
+
+User3
+
+user3
+UserPassword#3
+
+User4
+
+user4
+UserPassword#4
